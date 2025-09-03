@@ -2,13 +2,15 @@ import pygame
 import os
 import sys
 import time
+import random
 from moviepy.editor import VideoFileClip
 import numpy as np
 
 def load_media(folder):
     exts = ('.png', '.jpg', '.jpeg', '.bmp', '.gif', '.mp4', '.mov', '.avi')
     files = [f for f in os.listdir(folder) if f.lower().endswith(exts)]
-    files.sort()
+    # Randomize the order of files
+    random.shuffle(files)
     return [os.path.join(folder, f) for f in files]
 
 def play_video(screen, clip, slide_duration, hold_duration=10):
@@ -86,6 +88,12 @@ def main(folder, slide_duration=5, hold_duration=10):
     running = True
 
     while running:
+        # If we've reached the end of the list, re-randomize and start over
+        if idx >= len(media_files):
+            print("Reached end of slideshow, re-randomizing...")
+            media_files = load_media(folder)
+            idx = 0
+            
         path = media_files[idx]
         ext = os.path.splitext(path)[1].lower()
 
@@ -148,7 +156,7 @@ def main(folder, slide_duration=5, hold_duration=10):
                 if current_time - start_time > slide_duration + hold_duration:
                     break
 
-        idx = (idx + 1) % len(media_files)
+        idx += 1  # Simple increment - will be reset to 0 when reaching end
 
     pygame.quit()
 

@@ -5,6 +5,8 @@ A Python-based slideshow application that displays images and videos from a spec
 ## Features
 
 - Displays images (PNG, JPG, JPEG, BMP, GIF) and videos (MP4, MOV, AVI)
+- **Randomized order**: Media files are displayed in random order
+- **Continuous loop**: When all files have been shown, the order is re-randomized and the slideshow continues
 - Automatic scaling and panning for videos
 - Keyboard controls for navigation
 
