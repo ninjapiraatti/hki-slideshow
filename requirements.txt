@@ -1,0 +1,4 @@
+pygame==2.6.1
+moviepy==1.0.3
+numpy==2.3.2
+pillow==11.3.0
